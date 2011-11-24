@@ -1,0 +1,31 @@
+sick slider!
+
+sizeable image slider using jquery
+packed up in a middleman project
+
+not that special but it works!
+
+
+
+script:
+
+count = 0
+images = $("#gallery img")                                                - see index.html.haml for proper image placement
+
+($(images[i]).addClass("image-"+i) for i in [0..(images.length-1)])
+
+next = () ->
+  if (count < (images.length-1)) 
+    count += 1
+  else 
+    count = 0
+  show (count)                                                            - pseudo infinite loop
+  
+show = (num) ->
+  images.fadeOut(1000)
+  $(".image-"+num).stop().fadeIn(1000)                                    - transition time in ms
+
+$("#gallery").click(next)                                                 - wanna click? go ahead...
+
+show(count)
+setInterval next, 4000                                                    - auto rotating, delay in ms
