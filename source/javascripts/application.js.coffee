@@ -5,6 +5,7 @@ $(document).ready ->
   count = 0
   images = $("#gallery img")
   
+  
   ($(images[i]).addClass("image-"+i) for i in [0..(images.length-1)])
 
   next = () ->
