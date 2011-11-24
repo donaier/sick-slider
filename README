@@ -3,6 +3,10 @@ sick slider!
 sizeable image slider using jquery
 packed up in a middleman project
 
+next/prev buttons
+autorotation
+pause on hover (or any other event)
+
 not that special but it works!
 
 
@@ -12,6 +16,7 @@ script:
 count = 0
 images = $("#gallery img")                                                - see index.html.haml for proper image placement
 pp = false
+ticker = null
 
 ($(images[i]).addClass("image-"+i) for i in [0..(images.length-1)])
 
@@ -35,8 +40,10 @@ show = (num) ->
 
 startstop = () ->                                                         - handling the hover
   clearInterval(ticker) if !pp
+  ticker = null
   pp = !pp
-  setInterval next, 2000 if !pp
+  if (!pp)
+    ticker = setInterval next, 2000
 
 $("#next").click(next)
 $("#prev").click(prev)                                                    - use if required
