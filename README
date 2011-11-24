@@ -11,6 +11,7 @@ script:
 
 count = 0
 images = $("#gallery img")                                                - see index.html.haml for proper image placement
+pp = false
 
 ($(images[i]).addClass("image-"+i) for i in [0..(images.length-1)])
 
@@ -19,13 +20,28 @@ next = () ->
     count += 1
   else 
     count = 0
-  show (count)                                                            - pseudo infinite loop
+  show (count)                                                            - next slide
+  
+prev = () ->
+  if (count > 0)
+    count -= 1
+  else 
+    count = images.length-1
+  show (count)                                                            - prev slide
   
 show = (num) ->
   images.fadeOut(1000)
   $(".image-"+num).stop().fadeIn(1000)                                    - transition time in ms
 
-$("#gallery").click(next)                                                 - wanna click? go ahead...
+startstop = () ->                                                         - handling the hover
+  clearInterval(ticker) if !pp
+  pp = !pp
+  setInterval next, 2000 if !pp
+
+$("#next").click(next)
+$("#prev").click(prev)                                                    - use if required
+
+$("#gallery").hover(startstop)
 
 show(count)
-setInterval next, 4000                                                    - auto rotating, delay in ms
+ticker = setInterval next, 2000 if !pp                                    - initial start
