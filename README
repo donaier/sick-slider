@@ -14,6 +14,8 @@ not that special but it works!
 script:
 
 count = 0
+interval = 2000                                                           - configure
+transition = 1000
 images = $("#gallery img")                                                - see index.html.haml for proper image placement
 pp = false
 ticker = null
@@ -35,15 +37,15 @@ prev = () ->
   show (count)                                                            - prev slide
   
 show = (num) ->
-  images.fadeOut(1000)
-  $(".image-"+num).stop().fadeIn(1000)                                    - transition time in ms
+  images.fadeOut(transition)
+  $(".image-"+num).stop().fadeIn(transition)                              - transition time in ms
 
 startstop = () ->                                                         - handling the hover
   clearInterval(ticker) if !pp
   ticker = null
   pp = !pp
   if (!pp)
-    ticker = setInterval next, 2000
+    ticker = setInterval next, interval
 
 $("#next").click(next)
 $("#prev").click(prev)                                                    - use if required
@@ -51,4 +53,4 @@ $("#prev").click(prev)                                                    - use 
 $("#gallery").hover(startstop)
 
 show(count)
-ticker = setInterval next, 2000 if !pp                                    - initial start
+ticker = setInterval next, interval if !pp                                    - initial start

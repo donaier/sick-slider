@@ -3,6 +3,8 @@
 $(document).ready ->
 
   count = 0
+  interval = 2000
+  transition = 1000
   images = $("#gallery img")
   pp = false
   ticker = null
@@ -24,15 +26,15 @@ $(document).ready ->
     show (count)
     
   show = (num) ->
-    images.fadeOut(1000)
-    $(".image-"+num).stop().fadeIn(1000)
+    images.fadeOut(transition)
+    $(".image-"+num).stop().fadeIn(transition)
     
   startstop = () ->
     clearInterval(ticker) if !pp
     ticker = null
     pp = !pp
     if (!pp)
-      ticker = setInterval next, 2000
+      ticker = setInterval next, interval
     
     
   $("#next").click(next)
@@ -41,4 +43,4 @@ $(document).ready ->
   $("#gallery").hover(startstop)
 
   show(count)
-  ticker = setInterval next, 2000 if !pp
+  ticker = setInterval next, interval if !pp
