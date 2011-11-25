@@ -12,7 +12,7 @@ $(document).ready ->
   ($(images[i]).addClass("image-"+i) for i in [0..(images.length-1)])
 
   next = () ->
-    if (count < (images.length-1)) 
+    if (count < (images.length-1))
       count += 1
     else 
       count = 0
@@ -27,7 +27,7 @@ $(document).ready ->
     
   show = (num) ->
     images.fadeOut(transition)
-    $(".image-"+num).stop().fadeIn(transition)
+    $(".image-"+num).fadeIn(transition)
     
   startstop = () ->
     clearInterval(ticker) if !pp
@@ -35,7 +35,6 @@ $(document).ready ->
     pp = !pp
     if (!pp)
       ticker = setInterval next, interval
-    
     
   $("#next").click(next)
   $("#prev").click(prev)
