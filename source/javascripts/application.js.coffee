@@ -41,16 +41,21 @@ $(document).ready ->
       ticker = setInterval next, interval
       
   movethumbs = (num) ->
-    thumbs.animate("left": "+=240px")
+    thumbs.animate({"left": "+=240px"}, {500}, {"swing"}, hideyo(3))
     if (num == 0)
-      $(".thumb-2").animate("left": "-=960px")
+      $(".thumb-2").animate({"left": "-=960px"}, {500}, {"swing"}, showit(2))
     if (num == 1)
-      $(".thumb-3").animate("left": "-=960px")
+      $(".thumb-3").animate({"left": "-=960px"}, {500}, {"swing"}, showit(3))
     if (num == 2)
-      $(".thumb-0").animate("left": "-=960px")
+      $(".thumb-0").animate({"left": "-=960px"}, {500}, {"swing"}, showit(0))
     if (num == 3)
-      $(".thumb-1").animate("left": "-=960px")
+      $(".thumb-1").animate({"left": "-=960px"}, {500}, {"swing"}, showit(1))
+      
+  hideyo = (num) ->
+    $(".thumb-"+num).hide()
     
+  showit = (num) ->
+    $(".thumb-"+num).show()
     
   $("#next").click(next)
   $("#prev").click(prev)
