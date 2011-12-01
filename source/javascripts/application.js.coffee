@@ -1,4 +1,4 @@
-#= require jquery
+#= require jquery-1.4.3.min.js
 
 $(document).ready ->
 
@@ -6,10 +6,13 @@ $(document).ready ->
   interval = 2000
   transition = 1000
   images = $("#gallery img")
+  thumbs = $("#thumbs img")
   pp = false
   ticker = null
   
   ($(images[i]).addClass("image-"+i) for i in [0..(images.length-1)])
+  
+  ($(thumbs[i]).addClass("thumb-"+i) for i in [0..(thumbs.length-1)])
 
   next = () ->
     if (count < (images.length-1))
@@ -27,6 +30,7 @@ $(document).ready ->
     
   show = (num) ->
     images.fadeOut(transition)
+    movethumbs(num)
     $(".image-"+num).fadeIn(transition)
     
   startstop = () ->
@@ -35,6 +39,18 @@ $(document).ready ->
     pp = !pp
     if (!pp)
       ticker = setInterval next, interval
+      
+  movethumbs = (num) ->
+    thumbs.animate("left": "+=240px")
+    if (num == 0)
+      $(".thumb-2").animate("left": "-=960px")
+    if (num == 1)
+      $(".thumb-3").animate("left": "-=960px")
+    if (num == 2)
+      $(".thumb-0").animate("left": "-=960px")
+    if (num == 3)
+      $(".thumb-1").animate("left": "-=960px")
+    
     
   $("#next").click(next)
   $("#prev").click(prev)
