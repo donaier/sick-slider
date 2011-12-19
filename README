@@ -8,3 +8,20 @@ autorotation
 pause on hover (or any other event)
 
 not that special but it works!
+
+start like that:
+
+$(document).ready ->
+  slider = new SickSlider()
+  
+  
+possible options:
+
+  autoloop:     true/false    default: true                       - automatically shifts pictures
+  cicle:        true/false    default: true                       - create an infinite loop last to first
+  transition:   time in ms    default: 1000                       - time given to run the fadein/fadeout effect
+  interval:     time in ms    default: 4000                       - display time of every picture (not needed if autoloop = false)
+  images:       image array   default: $("#gallery img")          - divID containing the img's (see index.html file)
+  
+  
+have fun
