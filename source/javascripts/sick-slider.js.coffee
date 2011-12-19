@@ -1,15 +1,23 @@
-class SickSlider
+#= require jquery
+
+window.SickSlider ||= {}
+
+class window.SickSlider
   
-  constructor: (@images) ->
-    @images.each (idx) -> $(images[idx]).addClass("image-"+idx)
-    @length = @images.length
+  constructor: (opts = {} ) ->
+    
+    @autoloop = if opts.autoloop? then opts.autoloop else true
+    @cicle = if opts.cicle? then opts.cicle else true
+    @transition = if opts.transition? then opts.transition else 1000
+    @interval = if opts.interval? then opts.interval else 4000
+    @images = if opts.images? then opts.images else $("#gallery img")
+    
     @count = 0
-    @transition = 1000
-    @interval = 4000
     @pause = false
     @ticker = null
-    @autoloop = true
-    @cicle = true
+    
+    @images.each (idx) => $(@images[idx]).addClass("image-"+idx)
+    @length = @images.length
     
     @show(@count)
     @ticker = setInterval @ticker_kicker, @interval, @ if @autoloop
@@ -65,6 +73,3 @@ class SickSlider
       
   ticker_kicker: (_at) ->
     _at.next()
-     
-$(document).ready ->
-  slider = new SickSlider($("#gallery img"))
