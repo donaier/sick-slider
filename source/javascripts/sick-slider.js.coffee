@@ -26,7 +26,7 @@ class window.SickSlider
       @next()
     $("#prev").click =>
       @prev()
-    $("#gallery").hover =>
+    @images.hover =>
       @startstop()
     
   
